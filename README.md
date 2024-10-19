@@ -3,7 +3,8 @@
 
 Native Pay is a payment platform designed to simplify the process of sending money by allowing users to make transactions in their native language. By integrating AI and the Interledger Open Payments API, Native Pay makes payments easy and accessible, especially for users who struggle with language barriers or complex payment systems.
 
-## Problem We Are Solving
+### Problem We Are Solving
+
 Many people around the world face challenges when it comes to using digital payment systems. These challenges are often due to:
 - Language barriers: Payment platforms are typically designed with one or a few languages in mind, making it difficult for non-native speakers.
 - Complexity: Many payment platforms require users to understand technical terms or follow complicated processes.
@@ -11,13 +12,31 @@ Many people around the world face challenges when it comes to using digital paym
 
 Native Pay addresses these issues by allowing users to interact with the system in their own language. The AI translates their instructions into a transaction payload, making the process smooth and intuitive. All the user has to do is confirm the payment.
 
-## Key Features
+## Links
+
+* Presentation: [Google slides]()
+* Project Link: [NativePay Live PWA](https://native-pay.vercel.app/)
+* Demo: _>(Optional) Link to a live demo.<_
+* Other: _>(Optional) Any links you want to share. Make sure you add a description to the link.<_
+
+## How it works
+
 - **Native Language Support:** Users can send payments using natural language input, such as "Send R100 to Blessing."
 - **AI-Powered Transactions:** AI processes the user’s input, generating a payment payload and handling the technical details behind the scenes.
 - **Interledger Integration:** Leveraging the Open Payments API, Native Pay allows seamless transactions across different payment networks.
-- **User Confirmation:** Before processing the payment, the platform asks for user confirmation, ensuring transparency and security.
 
-## Benefits
+## How to run
+
+_>Please add a description of how to install, build, (test) and run your code.<_
+
+## Team members
+
+* [Blessing](https://github.com/Blssngx)
+* [Justice](https://github.com/JusticeMuch)
+* [Maphuti](https://github.com/Maphuti-Shilabje)
+* [Prejlin](https://github.com/PrejlinN)
+
+### Benefits
 1. **Ease of Use:** Native Pay makes the payment process as simple as speaking or typing in your native language, removing language and technical barriers.
 2. **Wider Accessibility:** By supporting multiple languages and simplifying payment processes, the platform can reach more users, especially in underserved communities.
 3. **Faster Transactions:** With AI handling the technical aspects of creating transaction payloads, users can complete payments quickly and efficiently.
