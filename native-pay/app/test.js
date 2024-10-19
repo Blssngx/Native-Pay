@@ -1,12 +1,26 @@
 import { createAuthenticatedClient } from "@interledger/open-payments";
 import { randomUUID } from "crypto";
-import { exit } from "process";
+// const express = require('express')
+import express from "express";
+const app = express();
+
+import 'dotenv/config';
+
+console.log(process.env)
+
+exit()
 
 const client = await createAuthenticatedClient({
     walletAddressUrl: process.env.PAYEE_WALLET_ADDRESS,
     privateKey: process.env.PAYEE_PRIVATE_KEY_PATH,
     keyId: process.env.PAYEE_KEY_ID,
 });
+
+// const payerClient = await createAuthenticatedClient({
+//     walletAddressUrl: process.env.WALLET_ADDRESS,
+//     privateKey: process.env.PRIVATE_KEY_PATH,
+//     keyId: process.env.PAYEE_KEY_ID,
+// }); 
 
 const payeeWalletAddress = await client.walletAddress.get({
     url: process.env.PAYEE_WALLET_ADDRESS,
@@ -18,7 +32,12 @@ const payerWalletAddress = await client.walletAddress.get({
 
 console.log(payeeWalletAddress)
 
+// exit();
 
+
+
+// console.log("WALLET ADDRESS:", walletAddress);
+// 
 const incomingPaymentgrant = await client.grant.request(
     {
         url: payeeWalletAddress.authServer,
@@ -47,8 +66,14 @@ const incomingPayment = await client.incomingPayment.create(
             assetScale: payeeWalletAddress.assetScale,
             value : "1000"
         },
+        // expiresAt: new Date(Date.now() + 60_000 * 10).toISOString(),
     },
 );
+
+
+
+
+// console.log(incomingPayment)
 
 const quoteGrant = await client.grant.request(
     {
@@ -66,6 +91,11 @@ const quoteGrant = await client.grant.request(
     },
 );
 
+
+// console.log(quoteGrant)
+
+// console.log(incomingPayment)
+// console.log()
 const outgoingPaymentquote = await client.quote.create(
     {
         url: payerWalletAddress.resourceServer,
@@ -77,6 +107,10 @@ const outgoingPaymentquote = await client.quote.create(
         receiver: incomingPayment.id,
     },
 );
+
+// console.log(outgoingPaymentquote)
+
+// console.log(payerWalletAddress)
 
 const outgoingPaymentGrant = await client.grant.request(
     {
@@ -95,6 +129,11 @@ const outgoingPaymentGrant = await client.grant.request(
                             assetCode: outgoingPaymentquote.debitAmount.assetCode,
                             assetScale: outgoingPaymentquote.debitAmount.assetScale,
                         },
+                        // receiveAmount: {
+                        //     value: "10",
+                        //     assetCode: "ZAR",
+                        //     assetScale: 2,
+                        // },
                     },
                 },
             ],
@@ -111,6 +150,7 @@ const outgoingPaymentGrant = await client.grant.request(
 );
 
 console.log(outgoingPaymentGrant)
+// console.log(outgoingPaymentquote.id)
 
 
 app.get('/', async (req, res) => {
@@ -155,8 +195,15 @@ app.get('/', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
+
+
+    // console.log(outgoingPayment)
+    // res.send("{}")
 })
 
 app.listen(3000)
 
 
+
+
+// console.log(outgoingPaymentGrant)

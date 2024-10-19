@@ -1,17 +1,22 @@
 // app/api/initiate-payment/route.ts
-// @ts-nocheck
+
 import { NextResponse } from 'next/server';
-import { getAuthenticatedClient } from '@/lib/interledgerClient';
+// import { getAuthenticatedClient } from '@/lib/interledgerClient';
+import { createAuthenticatedClient, AuthenticatedClient } from "@interledger/open-payments";
 import { randomUUID } from 'crypto';
 
 export async function POST(request: Request) {
   try {
+    console.log(process.env.PAYEE_WALLET_ADDRESS);
     // Initialize the authenticated client
-    const client = await getAuthenticatedClient({
-      walletAddressUrl: process.env.PAYEE_WALLET_ADDRESS!,
-      privateKeyPath: process.env.PAYEE_PRIVATE_KEY_PATH!,
-      keyId: process.env.PAYEE_KEY_ID!,
+    const client = await createAuthenticatedClient({
+        walletAddressUrl: process.env.PAYEE_WALLET_ADDRESS,
+        privateKey: Buffer.from("LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUUxNEFUVGJjSkgzaC9RT0d4ZHNsR0w2UmE4eGc1U0RVcjRGczlzeCtmNUcKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQo=","base64"),
+        keyId: process.env.PAYEE_KEY_ID,
     });
+    
+
+    console.log(client)
 
     // Retrieve Payee and Payer Wallet Addresses
     const payeeWalletAddress = await client.walletAddress.get({
