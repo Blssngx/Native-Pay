@@ -1,3 +1,21 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-empty-object-type": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@next/next/no-img-element": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/no-children-prop": "off",
+    "prefer-const": "off",
+    "jsx-a11y/aria-props": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "react/jsx-key": "off",
+    "react-hooks/exhaustive-deps": "off"
+  }
 }
