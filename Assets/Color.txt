@@ -1,0 +1,33 @@
+Here’s a suggested color palette for **Native Pay**, designed to be friendly, accessible, and modern:
+
+1. **Primary Color (Trust & Security):**  
+   - **Color:** Deep Blue  
+   - **Hex:** #004AAD  
+   - **Usage:** For the main buttons, headers, and key elements like the "Confirm Payment" button. Blue conveys trust, security, and reliability.
+
+2. **Secondary Color (Accessibility & Energy):**  
+   - **Color:** Vibrant Green  
+   - **Hex:** #4CAF50  
+   - **Usage:** For action buttons, notifications, and confirmations, symbolizing success and positive interactions.
+
+3. **Accent Color (Attention & Engagement):**  
+   - **Color:** Bright Orange  
+   - **Hex:** #FF9800  
+   - **Usage:** For highlights, prompts, and any important warnings or attention-grabbing elements.
+
+4. **Background Color (Neutral & Readability):**  
+   - **Color:** Light Gray  
+   - **Hex:** #F5F5F5  
+   - **Usage:** For the app background to provide a neutral canvas that is easy on the eyes.
+
+5. **Text Color (Clarity & Simplicity):**  
+   - **Color:** Dark Gray  
+   - **Hex:** #333333  
+   - **Usage:** For primary text and key information for easy readability and contrast against light backgrounds.
+
+6. **Secondary Text Color (Subtle Details):**  
+   - **Color:** Medium Gray  
+   - **Hex:** #757575  
+   - **Usage:** For secondary text like labels, hints, and less important information.
+
+This palette creates a balance of trust, simplicity, and user-friendliness, enhancing the Native Pay user experience. Let me know if you'd like adjustments!
