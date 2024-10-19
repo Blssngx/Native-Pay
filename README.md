@@ -14,7 +14,7 @@ Native Pay addresses these issues by allowing users to interact with the system 
 
 ## Links
 
-* Presentation: [Google slides]()
+* Presentation: [Google slides](https://docs.google.com/presentation/d/1-yY-g48OM9C6VUGOn8OyRgjIrmdTvfojEDjSFLWAG24/edit?usp=sharing)
 * Project Link: [NativePay Live PWA](https://native-pay.vercel.app/)
 * Demo: _>(Optional) Link to a live demo.<_
 * Other: _>(Optional) Any links you want to share. Make sure you add a description to the link.<_
