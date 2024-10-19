@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name" : "Justin",
+        "surname" : "Ronald",
+        "wallet_address" : "https://ilp.interledger-test.dev/team42-justin",
+        "private_key" : "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUV0aWROdjJDb3FRZkFVdEN2ZnMzSDY1dmQ2VG8rVThtZEJHaE9VUWNMRzMKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQ==",
+        "key_id": "9af58be3-6228-4b82-9895-9be2f7b4e372"
+    },
+    {
+        "id": 2,
+        "name" : "Prejlin",
+        "surname" : "Naidu",
+        "wallet_address" : "https://ilp.interledger-test.dev/pn-zar",
+        "private_key" : "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUUxNEFUVGJjSkgzaC9RT0d4ZHNsR0w2UmE4eGc1U0RVcjRGczlzeCtmNUcKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQo=",
+        "key_id": "0dc2aa15-f404-4900-848a-271c7b870533"
+    },
+    {
+        "id": 3,
+        "name" : "Blessing",
+        "surname" : "Hove",
+        "wallet_address" : "https://ilp.interledger-test.dev/pn-zar",
+        "private_key" : "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUUxNEFUVGJjSkgzaC9RT0d4ZHNsR0w2UmE4eGc1U0RVcjRGczlzeCtmNUcKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQo=",
+        "key_id": "0dc2aa15-f404-4900-848a-271c7b870533"
+    }
+]
