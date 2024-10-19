@@ -126,7 +126,7 @@ export default function Home() {
                 </div>
               </div>
             </form>
-            <Button
+            {/* <Button
               variant="outline"
               size="lg"
               className="p-4 mt-4 rounded-full bg-background"
@@ -137,7 +137,7 @@ export default function Home() {
             >
               <PlusIcon className="w-5 h-5" />
               <span>New Chat</span>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

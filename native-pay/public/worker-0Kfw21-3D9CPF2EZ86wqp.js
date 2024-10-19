@@ -1,0 +1,1 @@
+self.addEventListener("push",(function(t){const i=JSON.parse(t.data.text());t.waitUntil(registration.showNotification(i.title,{body:i.message,icon:"/icons/icon-192x192.png"}))}));
