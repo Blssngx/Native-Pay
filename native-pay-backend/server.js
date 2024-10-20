@@ -44,7 +44,7 @@ try {
 
 const tigerClient = createClient({
     cluster_id: 0n,
-    replica_addresses: [process.env.TB_ADDRESS || '3000'],
+    replica_addresses: [process.env.TB_ADDRESS || '3001'],
   });
 
 // Initialize the Open Payments client once to reuse across requests
