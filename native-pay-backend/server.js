@@ -13,7 +13,7 @@ const DATABASE_URL="mongodb+srv://blessinghove69:SyZdxnA6Jgd28B6S@cluster0.s0d7k
 const schemaData = JSON.parse(fs.readFileSync('./mongodb/schema.json', 'utf8'));
 const userSchema = new mongoose.Schema(schemaData);
 const userModel = mongoose.model('User', userSchema);
-const userId = 3;
+const userId = 2;
 
 await mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true,
@@ -290,23 +290,23 @@ app.get('/callback', async (req, res) => {
         // });
 
         if (outgoingPayment){
-            console.log(outgoingPayment)
+            const amount = outgoingPayment.debitAmount.value/10
             
-        //    const transfer_errors = await tigerClient.createTransfers([{
-        //     id: BigInt(Date.now()), // TigerBeetle time-based ID.
-        //     debit_account_id: BigInt(),
-        //     credit_account_id: 2n,
-        //     amount: 10n,
-        //     pending_id: 0n,
-        //     user_data_128: 0n,
-        //     user_data_64: 0n,
-        //     user_data_32: 0,
-        //     timeout: 0,
-        //     ledger: 700,
-        //     code: 720,
-        //     flags: 0,
-        //     timestamp: 0n,
-        //   }]); 
+           const transfer_errors = await tigerClient.createTransfers([{
+            id: BigInt(Date.now()), // TigerBeetle time-based ID.
+            debit_account_id: BigInt(userId),
+            credit_account_id: 2n,
+            amount: BigInt(amount),
+            pending_id: 0n,
+            user_data_128: 0n,
+            user_data_64: 0n,
+            user_data_32: 0,
+            timeout: 0,
+            ledger: 700,
+            code: 720,
+            flags: 0,
+            timestamp: 0n,
+          }]); 
         }
         
 
