@@ -15,6 +15,10 @@ import { z } from 'zod';
 // Sleep function to simulate delay
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// 3. Present the transaction summary to the user and ask for confirmation (e.g., "You are about to send R100 to Blessing. Do you confirm?").
+// 4. If the user confirms, process the transaction using \`process_transaction\`.
+// 5. Once the transaction is complete, show a success message (e.g., "Transaction successful!").
+
 const content = `\
 You are a payment assistant for Native Pay. You help users make transactions using their preferred language.
 
@@ -28,9 +32,6 @@ Start by asking the user for their preferred language:
 If the user provides a language, proceed with the following flow:
 1. Ask the user for the transaction details in their preferred language (e.g., "How much would you like to send, and to whom?")
 2. Once the user provides the details (amount and recipient), generate a transaction payload using \`create_transaction_payload\`.
-3. Present the transaction summary to the user and ask for confirmation (e.g., "You are about to send R100 to Blessing. Do you confirm?").
-4. If the user confirms, process the transaction using \`process_transaction\`.
-5. Once the transaction is complete, show a success message (e.g., "Transaction successful!").
 
 If the user asks for something unrelated to payments, respond that you are a payment assistant for Native Pay and cannot assist with unrelated requests.
 
@@ -72,6 +73,61 @@ export async function sendMessage(message: string): Promise<{
 
       return <BotMessage>{content}</BotMessage>;
     },
+    tools: {
+      initiate_transaction: {
+        description: "Get the current price of a given grocery product across multiple supermarkets.",
+        parameters: z.object({
+          receipientName: z.string().describe("The name of the person receiving funds. e.g. Blessing, Maphuti, Prejin."),
+          amount: z.string()
+        }),
+        generate: async function* ({ receipientName, amount }: { receipientName: string; amount: string }) {
+          yield (
+            <BotCard>
+              {/* <PriceSkeleton /> */}
+              <></>
+            </BotCard>
+          );
+
+          // Fetch price data from the new API endpoint
+          try {
+            const response = await fetch(`http://localhost:8000/initiate-transaction?name=${receipientName}&amount=${amount}`);
+
+            if (!response.ok) {
+              throw new Error('Failed to initiate transaction.');
+            }
+
+            const result = await response.json();
+
+            // if (!result.data || result.data.length === 0) {
+            //   return <BotMessage>Transaction failed!</BotMessage>;
+            // }
+
+            console.log(result.data[0])
+
+            await sleep(1000);
+
+            history.done([
+              ...history.get(),
+              {
+                role: 'assistant',
+                name: 'initiate_transaction',
+                content: `[Transaction Initiated successfully]`,
+              },
+            ]);
+
+            return (
+              <BotCard>
+                <></>
+                {JSON.stringify(result)}
+              </BotCard>
+            );
+          } catch (error) {
+            console.error(error);
+            return <BotMessage>Error initiating transaction!</BotMessage>;
+          }
+        },
+      },
+    },
     temperature: 0,
   });
 
@@ -85,7 +141,7 @@ export async function sendMessage(message: string): Promise<{
 // Define the AI state and UI state types
 export type AIState = Array<{
   id?: number;
-  name?: 'get_product_price' | 'get_product_facts';
+  name?: 'initiate_transaction';
   role: 'user' | 'assistant' | 'system';
   content: string;
 }>;

@@ -1,0 +1,22 @@
+{
+    "Prejin": {
+        "walletAddressUrl": "https://ilp.interledger-test.dev/pn-zar",
+        "privateKey": "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUUxNEFUVGJjSkgzaC9RT0d4ZHNsR0w2UmE4eGc1U0RVcjRGczlzeCtmNUcKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQo=",
+        "keyId": "0dc2aa15-f404-4900-848a-271c7b870533"
+    },
+    "Justice": {
+        "walletAddressUrl": "https://ilp.interledger-test.dev/team42-justin",
+        "privateKey": "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUV0aWROdjJDb3FRZkFVdEN2ZnMzSDY1dmQ2VG8rVThtZEJHaE9VUWNMRzMKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQoK",
+        "keyId": "9af58be3-6228-4b82-9895-9be2f7b4e372"
+    },
+    "Maphuti": {
+        "walletAddressUrl": "https://ilp.interledger-test.dev/maps",
+        "privateKey": "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUpMVENRYUViLzA2QWcwWi9vWXpDRENhOEN3S2hJaGdDdml4c3lpNUIwVTAKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQ==",
+        "keyId": "f05aeed7-110c-45ef-aaf4-10f92da5c9b0"
+    },
+    "Blessing": {
+        "walletAddressUrl": "https://ilp.interledger-test.dev/53b00771",
+        "privateKey": "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUoyUDNXRS9YNWJLb2pITHlVUStDUDdHNGZ0NC8zb29Zd0lDUnovVjN6QzgKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQ==",
+        "keyId": "def3ee32-c8ae-467a-a5fa-8d025f1a3b1e"
+    }
+}
