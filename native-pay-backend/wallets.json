@@ -1,7 +1,7 @@
 {
-    "Prejin": {
+    "Prejlin": {
         "walletAddressUrl": "https://ilp.interledger-test.dev/pn-zar",
-        "privateKey": "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUUxNEFUVGJjSkgzaC9RT0d4ZHNsR0w2UmE4eGc1U0RVcjRGczlzeCtmNUcKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQo=",
+        "privateKey": "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1DNENBUUF3QlFZREsyVndCQ0lFSUUxNEFUVGJjSkgzaC9RT0d4ZHNsR0w2UmE4eGc1U0RVcjRGczlzeCtmNUcKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQoKCg==",
         "keyId": "0dc2aa15-f404-4900-848a-271c7b870533"
     },
     "Justice": {

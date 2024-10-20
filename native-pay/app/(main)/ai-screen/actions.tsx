@@ -1,16 +1,13 @@
 'use server';
 
 import { BotCard, BotMessage } from '@/components/ui/message';
-// import { Price } from '@ai-rsc/components/llm-grocery/price';
-// import { PriceSkeleton } from '@ai-rsc/components/llm-grocery/price-skeleton';
-// import { ProductFacts } from '@ai-rsc/components/llm-grocery/product-facts';
-// import { ProductFactsSkeleton } from '@ai-rsc/components/llm-grocery/product-facts-skeleton';
 import { openai } from '@ai-sdk/openai';
 import type { CoreMessage, ToolInvocation } from 'ai';
 import { createAI, getMutableAIState, streamUI } from 'ai/rsc';
 import { Loader2 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { z } from 'zod';
+import { ServerSide } from './ServerSide';
 
 // Sleep function to simulate delay
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -75,55 +72,82 @@ export async function sendMessage(message: string): Promise<{
     },
     tools: {
       initiate_transaction: {
-        description: "Get the current price of a given grocery product across multiple supermarkets.",
+        description: "Initiate a transaction by specifying the recipient's name and the amount.",
         parameters: z.object({
-          receipientName: z.string().describe("The name of the person receiving funds. e.g. Blessing, Maphuti, Prejin."),
-          amount: z.string()
+          recipientName: z.string().describe("The name of the person receiving funds. e.g. Blessing, Maphuti, Prejin."),
+          amount: z.string().describe("The amount to be sent."),
         }),
-        generate: async function* ({ receipientName, amount }: { receipientName: string; amount: string }) {
+        generate: async function* ({ recipientName, amount }: { recipientName: string; amount: string }) {
+          // Initial loading state
           yield (
             <BotCard>
+              {/* You can uncomment and use a skeleton loader if available */}
               {/* <PriceSkeleton /> */}
-              <></>
+              <p>Initiating transaction...</p>
             </BotCard>
           );
-
-          // Fetch price data from the new API endpoint
+    
           try {
-            const response = await fetch(`http://localhost:8000/initiate-transaction?name=${receipientName}&amount=${amount}`);
-
+            // Make the API request
+            const response = await fetch(
+              `http://localhost:8000/initiate-transaction?name=${encodeURIComponent(recipientName)}&amount=${encodeURIComponent(amount)}`
+            );
+    
+            console.log("Response Status:", response.status);
+    
+            // Check if the response is successful
             if (!response.ok) {
-              throw new Error('Failed to initiate transaction.');
+              throw new Error(`Failed to initiate transaction. Status: ${response.status}`);
             }
-
+    
             const result = await response.json();
-
-            // if (!result.data || result.data.length === 0) {
-            //   return <BotMessage>Transaction failed!</BotMessage>;
-            // }
-
-            console.log(result.data[0])
-
-            await sleep(1000);
-
+    
+            console.log("Result:", result);
+    
+            // Validate the response structure
+            if (!result.outgoingPaymentGrant) {
+              throw new Error("Invalid response structure: 'outgoingPaymentGrant' field is missing.");
+            }
+    
+            // Extract relevant data from the response
+            const { interact, continue: continueData } = result.outgoingPaymentGrant;
+    
+            // Optional: You can process or store these values as needed
+            const interactRedirect = interact.redirect;
+            const interactFinish = interact.finish;
+            const accessToken = continueData.access_token.value;
+            const continueUri = continueData.uri;
+            const waitTime = continueData.wait;
+    
+            // Simulate a delay if needed
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+    
+            // Update the chat history to indicate success
             history.done([
               ...history.get(),
               {
-                role: 'assistant',
-                name: 'initiate_transaction',
-                content: `[Transaction Initiated successfully]`,
+                role: "assistant",
+                name: "initiate_transaction",
+                content: `[Transaction Initiated Successfully]`,
               },
             ]);
-
+    
+            // Display the transaction details to the user
             return (
               <BotCard>
-                <></>
-                {JSON.stringify(result)}
+                <h3>Transaction Initiated Successfully!</h3>
+                {/* <p>
+                  <strong>Interact URL:</strong>{" "}
+                  <a href={interactRedirect} >
+                    {interactRedirect}
+                  </a>
+                </p> */}
+                <ServerSide to={interactRedirect}/>
               </BotCard>
             );
           } catch (error) {
-            console.error(error);
-            return <BotMessage>Error initiating transaction!</BotMessage>;
+            console.error("Error initiating transaction:", error);
+            return <BotMessage>Error initiating transaction! Please try again later.</BotMessage>;
           }
         },
       },

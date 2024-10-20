@@ -235,10 +235,11 @@ app.get('/callback', async (req, res) => {
         // Optionally, remove the grant from the cache after successful processing
         grantCache.delete(grantId);
 
-        res.json({
-            success: true,
-            outgoingPayment,
-        });
+        // res.json({
+        //     success: true,
+        //     outgoingPayment,
+        // });
+        res.redirect("https://wallet.interledger-test.dev/transactions")
     } catch (error) {
         console.error('Callback Handling Error:', error);
         res.status(500).json({ error: 'Failed to handle callback' });

@@ -14,18 +14,6 @@ import type { SubmitHandler } from "react-hook-form";
 import TextareaAutosize from 'react-textarea-autosize';
 import type { AI } from "./actions";
 
-/*
-  !-- With language models becoming better at reasoning, we believe that there is a future where
-  !-- developers only write core application specific components while models take care of routing
-  !-- them based on the user's state in an application.
-
-  !-- With generative user interfaces, the language model decides which user interface to render
-  !-- based on the user's state in the application, giving users the flexibility to interact with
-  !-- your application in a conversational manner instead of navigating through a series of predefined routes.
-*/
-
-// Here we can read the streamable UI using the sendMessage Server Action via a function call
-// render the returned UI like any other normal React components.
 export default function Home() {
   const [messages, setMessages] = useUIState<typeof AI>();
   const { sendMessage } = useActions<typeof AI>();
@@ -89,24 +77,23 @@ export default function Home() {
 
   return (
     <main>
-      <div className="pb-[200px] pt-4 md:pt-10">
-
+      <div className="pb-[200px] h-screen pt-4 md:pt-10 text-white bg-[#470c6e]">
         <ChatList messages={messages} />
         <ChatScrollAnchor trackVisibility={true} />
       </div>
-      <div className="fixed inset-x-0 bottom-0 w-full bg-gradient-to-b from-muted/30 from-0% to-muted/30 to-50% duration-300 ease-in-out animate-in dark:from-background/10 dark:from-10% dark:to-background/80 peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
+      <div className="fixed inset-x-0 bottom-0 w-full bg-[#470c6e] duration-300 ease-in-out animate-in dark:from-background/10 dark:from-10% dark:to-background/80 peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
         <div className="mx-auto sm:max-w-2xl sm:px-4">
-          <div className="px-4 flex justify-center flex-col py-2 space-y-4 border-t shadow-lg bg-background sm:rounded-t-xl sm:border md:py-4 bg-white">
+          <div className="px-4 flex justify-center flex-col py-2 space-y-4 border-t shadow-lg bg-[#470c6e] sm:rounded-t-xl sm:border md:py-4 bg-white">
             <form
               ref={formRef}
               onSubmit={form.handleSubmit(submitHandler)}
             >
-              <div className="relative flex flex-col w-full overflow-hidden max-h-60 grow bg-background sm:rounded-md sm:border">
+              <div className="relative flex flex-col w-full overflow-hidden max-h-60 grow bg-[#470c6e] sm:rounded-md sm:border">
                 <TextareaAutosize
                   tabIndex={0}
                   onKeyDown={onKeyDown}
                   placeholder="Send a message."
-                  className="min-h-[60px] w-full resize-none bg-transparent pl-4 pr-16 py-[1.3rem] focus-within:outline-none sm:text-sm"
+                  className="min-h-[60px] w-full resize-none bg-transparent pl-4 pr-16 py-[1.3rem] focus-within:outline-none sm:text-lg"
                   autoFocus
                   spellCheck={false}
                   autoComplete="off"
@@ -126,18 +113,6 @@ export default function Home() {
                 </div>
               </div>
             </form>
-            {/* <Button
-              variant="outline"
-              size="lg"
-              className="p-4 mt-4 rounded-full bg-background"
-              onClick={e => {
-                e.preventDefault();
-                window.location.reload();
-              }}
-            >
-              <PlusIcon className="w-5 h-5" />
-              <span>New Chat</span>
-            </Button> */}
           </div>
         </div>
       </div>

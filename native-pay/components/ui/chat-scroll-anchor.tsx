@@ -24,5 +24,5 @@ export function ChatScrollAnchor({ trackVisibility }: ChatScrollAnchorProps) {
     }
   }, [inView, entry, isAtBottom, trackVisibility]);
 
-  return <div ref={ref} className="h-px w-full" />;
+  return <div ref={ref} className="h-px bg-[#470c6e] w-full" />;
 }
