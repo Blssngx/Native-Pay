@@ -3,8 +3,8 @@
 
 Native Pay is a payment platform designed to simplify the process of sending money by allowing users to make transactions in their native language. By integrating AI and the Interledger Open Payments API, Native Pay makes payments easy and accessible, especially for users who struggle with language barriers or complex payment systems.
 
-Watch our demo to see Start3 in action:  
-[![Start3 Demo Video](https://img.youtube.com/vi/D7UL1uHWY-A/0.jpg)](https://www.youtube.com/watch?v=D7UL1uHWY-A)
+Watch our demo to see Native Pay in action:  
+[![Native Pay Demo Video](https://img.youtube.com/vi/D7UL1uHWY-A/0.jpg)](https://www.youtube.com/watch?v=D7UL1uHWY-A)
 
 ### Problem We Are Solving
 
