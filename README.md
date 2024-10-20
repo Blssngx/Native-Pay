@@ -26,7 +26,7 @@ Native Pay addresses these issues by allowing users to interact with the system 
 - **AI-Powered Transactions:** AI processes the user’s input, generating a payment payload and handling the technical details behind the scenes.
 - **Interledger Integration:** Leveraging the Open Payments API, Native Pay allows seamless transactions across different payment networks.
 
-![Architecture Diagram](./assets/architecture.jpg)
+![Architecture Diagram](./assets/architecture.png)
 
 
 ## How to run
