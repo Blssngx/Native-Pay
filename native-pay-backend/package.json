@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "database" : "node tigerbeetle/bootstrap.js && node mongodb/bootstrap.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,9 @@
     "@interledger/open-payments": "^6.13.2",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "nodemon": "^3.1.7"
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.7.2",
+    "nodemon": "^3.1.7",
+    "tigerbeetle-node": "^0.16.9"
   }
 }

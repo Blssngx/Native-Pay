@@ -6,6 +6,19 @@ import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
+import mongoose from 'mongoose';
+import { createClient, AccountFilterFlags, CreateTransferError } from 'tigerbeetle-node';
+
+const DATABASE_URL="mongodb+srv://blessinghove69:SyZdxnA6Jgd28B6S@cluster0.s0d7k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const schemaData = JSON.parse(fs.readFileSync('./mongodb/schema.json', 'utf8'));
+const userSchema = new mongoose.Schema(schemaData);
+const userModel = mongoose.model('User', userSchema);
+const userId = 3;
+
+await mongoose.connect(DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 const app = express();
 app.use(express.json());
@@ -29,6 +42,11 @@ try {
     process.exit(1); // Exit the application if wallets cannot be loaded
 }
 
+const tigerClient = createClient({
+    cluster_id: 0n,
+    replica_addresses: [process.env.TB_ADDRESS || '3000'],
+  });
+
 // Initialize the Open Payments client once to reuse across requests
 let client; // We'll initialize this per wallet, so remove the global client
 // Removed the global client initialization
@@ -42,23 +60,25 @@ app.get('/initiate-transaction', async (req, res) => {
     }
 
     // Retrieve wallet configuration by name
-    const walletConfig = walletsConfig[name];
+    // const walletConfig = walletsConfig[name];
 
-    if (!walletConfig) {
+    const user = await userModel.findOne({name : name})
+    
+    if (!user) {
         return res.status(404).json({ error: `Wallet configuration for name "${name}" not found` });
     }
 
     try {
-        const { walletAddressUrl, privateKey, keyId } = walletConfig;
+        const { wallet_address, private_key, key_id } = user;
 
         const client = await createAuthenticatedClient({
-            walletAddressUrl,
-            privateKey: Buffer.from(privateKey, 'base64'),
-            keyId,
+            walletAddressUrl :wallet_address,
+            privateKey: Buffer.from(private_key, 'base64'),
+            keyId: key_id,
         });
 
         const payeeWalletAddress = await client.walletAddress.get({
-            url: walletAddressUrl,
+            url: wallet_address,
         });
 
         const payerWalletAddress = await client.walletAddress.get({
@@ -187,6 +207,35 @@ app.get('/initiate-transaction', async (req, res) => {
     }
 });
 
+app.get('/balance' , async (req, res) => {
+    const filter = {
+        account_id: BigInt(userId),
+        user_data_128: 0n, // No filter by UserData.
+        user_data_64: 0n,
+        user_data_32: 0,
+        code: 0, // No filter by Code.
+        timestamp_min: 0n, // No filter by Timestamp.
+        timestamp_max: 0n, // No filter by Timestamp.
+        limit: 10, // Limit to ten balances at most.
+        flags: AccountFilterFlags.debits | // Include transfer from the debit side.
+          AccountFilterFlags.credits | // Include transfer from the credit side.
+          AccountFilterFlags.reversed, // Sort by timestamp in reverse-chronological order.
+      };
+      
+      const account_balances = await tigerClient.getAccountBalances(filter);
+
+      console.log(account_balances)
+      if (account_balances && Array.isArray(account_balances) && account_balances.length > 0){
+        return res.status(200).json({
+            balance : account_balances[0].credits_pending - account_balances[0].debits_pending
+        })
+      }
+
+      res.status(500).json({
+        error : 'Not able to get balance'
+      })
+})
+
 // GET /callback - Handle the redirect callback
 app.get('/callback', async (req, res) => {
     const { grantId, interact_ref, hash } = req.query;
@@ -239,6 +288,28 @@ app.get('/callback', async (req, res) => {
         //     success: true,
         //     outgoingPayment,
         // });
+
+        if (outgoingPayment){
+            console.log(outgoingPayment)
+            
+        //    const transfer_errors = await tigerClient.createTransfers([{
+        //     id: BigInt(Date.now()), // TigerBeetle time-based ID.
+        //     debit_account_id: BigInt(),
+        //     credit_account_id: 2n,
+        //     amount: 10n,
+        //     pending_id: 0n,
+        //     user_data_128: 0n,
+        //     user_data_64: 0n,
+        //     user_data_32: 0,
+        //     timeout: 0,
+        //     ledger: 700,
+        //     code: 720,
+        //     flags: 0,
+        //     timestamp: 0n,
+        //   }]); 
+        }
+        
+
         res.redirect("https://wallet.interledger-test.dev/transactions")
     } catch (error) {
         console.error('Callback Handling Error:', error);
