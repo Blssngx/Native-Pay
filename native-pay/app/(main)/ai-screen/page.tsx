@@ -13,6 +13,7 @@ import { useEffect, useRef } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import TextareaAutosize from 'react-textarea-autosize';
 import type { AI } from "./actions";
+import LanguageComponent from "@/components/ui/language";
 
 export default function Home() {
   const [messages, setMessages] = useUIState<typeof AI>();
@@ -78,6 +79,7 @@ export default function Home() {
   return (
     <main>
       <div className="pb-[200px] h-screen pt-4 md:pt-10 text-white bg-[#470c6e]">
+        {/* <LanguageComponent/> */}
         <ChatList messages={messages} />
         <ChatScrollAnchor trackVisibility={true} />
       </div>
@@ -93,7 +95,7 @@ export default function Home() {
                   tabIndex={0}
                   onKeyDown={onKeyDown}
                   placeholder="Send a message."
-                  className="min-h-[60px] w-full resize-none bg-transparent pl-4 pr-16 py-[1.3rem] focus-within:outline-none sm:text-lg"
+                  className="min-h-[60px] text-white w-full resize-none bg-transparent pl-4 pr-16 py-[1.3rem] focus-within:outline-none sm:text-lg"
                   autoFocus
                   spellCheck={false}
                   autoComplete="off"

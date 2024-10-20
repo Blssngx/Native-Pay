@@ -75,7 +75,7 @@ export async function sendMessage(message: string): Promise<{
         description: "Initiate a transaction by specifying the recipient's name and the amount.",
         parameters: z.object({
           recipientName: z.string().describe("The name of the person receiving funds. e.g. Blessing, Maphuti, Prejin."),
-          amount: z.string().describe("The amount to be sent."),
+          amount: z.string().describe("The amount to be sent. Remove the currency"),
         }),
         generate: async function* ({ recipientName, amount }: { recipientName: string; amount: string }) {
           // Initial loading state
@@ -86,11 +86,13 @@ export async function sendMessage(message: string): Promise<{
               <p>Initiating transaction...</p>
             </BotCard>
           );
+
+          const NormNumber = Number(amount)*100;
     
           try {
             // Make the API request
             const response = await fetch(
-              `http://localhost:8000/initiate-transaction?name=${encodeURIComponent(recipientName)}&amount=${encodeURIComponent(amount)}`
+              `http://localhost:8000/initiate-transaction?name=${encodeURIComponent(recipientName)}&amount=${encodeURIComponent(NormNumber.toString())}`
             );
     
             console.log("Response Status:", response.status);
