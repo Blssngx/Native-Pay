@@ -26,9 +26,53 @@ Native Pay addresses these issues by allowing users to interact with the system 
 - **AI-Powered Transactions:** AI processes the user’s input, generating a payment payload and handling the technical details behind the scenes.
 - **Interledger Integration:** Leveraging the Open Payments API, Native Pay allows seamless transactions across different payment networks.
 
+![Architecture Diagram](./assets/architecture.jpg)
+
+
 ## How to run
 
-_>Please add a description of how to install, build, (test) and run your code.<_
+1. Change directory into native-pay:
+   ```bash
+   cd native-pay
+   ```
+
+2. Update the `.env` file with the OpenAI API key:
+   ```bash
+   OPENAI_API_KEY = "<API KEY HERE>"
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm i
+   ```
+
+4. Run the project:
+   ```bash
+   npm run dev
+   ```
+
+5. Open another terminal and change directory into `native-pay-backend`:
+   ```bash
+   cd native-pay-backend
+   ```
+
+6. Update the `.env` file with your wallet address from [Test Wallet](https://wallet.interledger-test.dev/):
+   ```bash
+   WALLET_ADDRESS = "<WALLET ADDRESS>"
+   ```
+
+7. Install dependencies for the backend:
+   ```bash
+   npm i
+   ```
+
+8. Start the server:
+   ```bash
+   npm run start
+   ```
+
+The backend runs on port 8000 and the front-end runs on port 3000. Ensure you are using the same browser in which you logged into your test wallet.
+
 
 ## Team members
 
